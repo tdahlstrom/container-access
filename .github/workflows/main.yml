@@ -18,4 +18,4 @@ jobs:
     steps:
       - name: Check local file system
         run: |
-          ls ..
+          docker images
