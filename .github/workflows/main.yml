@@ -9,7 +9,7 @@ jobs:
       - name: Get contents of log file
         run: |
           docker run --rm -itd -p 6080:6080 -v .:/data -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/.X11-unix:/tmp/.X11-unix --privileged --group-add root biodepot/bwb /bin/sh
-          cat /root/.local/share/Orange/3.14.0.dev/canvas/canvas.log
+          sudo cat /root/.local/share/Orange/3.14.0.dev/canvas/canvas.log
           
   #   container:
   #     image: biodepot/bwb:latest
