@@ -5,17 +5,23 @@ on: [push]
 jobs:
   container-open:
     runs-on: ubuntu-24.04
-    container:
-      image: biodepot/bwb:latest
-      ports:
-        - 6080
-      volumes:
-        - .:/data
-        - /var/run/docker.sock:/var/run/docker.sock
-        - /tmp/.X11-unix:/tmp/.X11-unix
-      options: --privileged --group-add root
-        
     steps:
-      - name: Check local file system
+      - name: Get contents of log file
         run: |
-          docker images
+          docker run --rm -itd -p 6080:6080 -v .:/data -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/.X11-unix:/tmp/.X11-unix --privileged --group-add root biodepot/bwb /bin/sh
+          cat /root/.local/share/Orange/3.14.0.dev/canvas/canvas.log
+          
+  #   container:
+  #     image: biodepot/bwb:latest
+  #     ports:
+  #       - 6080
+  #     volumes:
+  #       - .:/data
+  #       - /var/run/docker.sock:/var/run/docker.sock
+  #       - /tmp/.X11-unix:/tmp/.X11-unix
+  #     options: --privileged --group-add root --name bwb --detach --interactive --tty
+        
+  #   steps:
+  #     - name: Check local file system
+  #       run: |
+  #         docker exec -d bwb cat /root/.local/share/Orange/3.14.0.dev/canvas/canvas.log
