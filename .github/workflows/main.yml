@@ -1,0 +1,21 @@
+name: Enter Container
+
+on: [push]
+
+jobs:
+  container-open:
+    runs-on: ubuntu-24.04
+    container:
+      image: biodepot/bwb:latest
+      ports:
+        - 6080
+      volumes:
+        - /:/data
+      options: |
+        -- priviledged
+        -- group-add root
+        
+    steps:
+      - name: Check local file system
+        run: |
+          ls
