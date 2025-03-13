@@ -10,10 +10,12 @@ jobs:
       ports:
         - 6080
       volumes:
-        - /:/data
+        - .:/data
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /tmp/.X11-unix:/tmp/.X11-unix
       options: |
-        -- priviledged
-        -- group-add root
+        --priviledged
+        --group-add root
         
     steps:
       - name: Check local file system
